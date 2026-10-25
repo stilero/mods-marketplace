@@ -2,6 +2,8 @@
 
 A Claude Code mod that teaches good prompting. Quill, a little pixel owl with reading glasses, reads the prompt that starts a piece of work and shows, in its own pane, which parts of a good brief it covers and what to add. The aim is more time planning up front and fewer rounds of fixing the implementation afterwards.
 
+<img src="../../docs/images/prompt-coach.svg" alt="Quill the owl in four moods next to the Prompt coach pane scoring a brief on goal, why, constraints, done-when and reuse" width="880">
+
 A good brief has five parts:
 
 | Part | What it says |
@@ -25,7 +27,20 @@ Not every part applies to every prompt. A small model (Haiku by default) decides
 - **Not spammy**. Quill reads the first task prompt of each conversation: at session start, after `/clear` and after a compaction. A resumed conversation is not read. `/prompt-coach next` or the pane's "read my next prompt" button asks for one more read.
 - **A little progress line**: the share of applicable parts your last ten briefs covered, kept across sessions.
 
-The look follows [cache-thermo](../cache-thermo/): calm mint, honey and rose on a dark panel, round dim borders, pixel art on the desktop and one-cell ASCII in the terminal.
+### Improve it
+
+<img src="../../docs/images/prompt-coach-improve.svg" alt="The prompt back in the prompt box with a Done when heading and a question to answer, and Quill showing the score going from 3 of 4 to 4 of 4" width="880">
+
+### In the terminal
+
+The look follows [cache-thermo](../cache-thermo/): calm mint, honey and rose on a dark panel, round dim borders, pixel art on the desktop and one-cell ASCII in the terminal:
+
+```
+ ,___,     ,___,        ,___,  ?     ,___,  *
+ (◕,◕)     (◕,◕) ..     (◕,◕)        (ᵔ,ᵔ)
+ /)_)      /)_)         /)_)         /)_)
+ idle     reading       hmm          happy
+```
 
 ## Install
 

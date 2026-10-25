@@ -171,8 +171,88 @@ function promptCoach() {
   return scene(W, H, 'prompt-coach: Quill the owl scores your brief', s)
 }
 
+// ---------------------------------------------------------------------------------------------------------------
+// Plugin README scenes: the cast of cache-thermo, a den with cards, and Quill's improve-it round trip.
+
+function cacheThermoCast() {
+  const W = 880, H = 250
+  let s = ''
+  s += text(32, 44, 'the cast', { size: 20, fill: P.hot, weight: 'bold', spacing: 1 })
+  const cast = [
+    [thermo.emberSvg('hot', 96), 'Ember', 'cache hot', P.hot],
+    [thermo.emberSvg('working', 96), 'Ember', 'refreshing', P.hot],
+    [thermo.emberSvg('warm', 96), 'Ember', 'cooling down', P.warm],
+    [thermo.frostbitSvg(96), 'Frostbit', 'cache cold', P.frost],
+    [thermo.campfireSvg(96), 'Campfire', 'on a break', P.ember],
+  ]
+  cast.forEach(([svg, name, label, color], i) => {
+    const x = 48 + i * 166
+    s += place(svg, x, 76)
+    s += text(x + 48, 200, name, { size: 13, fill: color, weight: 'bold', anchor: 'middle' })
+    s += text(x + 48, 220, label, { size: 12, fill: MUTED, anchor: 'middle' })
+  })
+  return scene(W, H, 'cache-thermo mascots: Ember in three moods, Frostbit and the campfire', s)
+}
+
+function agentDenPanel() {
+  const W = 880, H = 470
+  let s = ''
+  s += text(32, 44, 'Agent den', { size: 18, fill: LILAC, weight: 'bold', spacing: 1 })
+  s += text(W - 32, 44, '● 2 busy  ◐ 1 waiting  ◌ 1 napping  ✓ 1 done', { size: 13, fill: MUTED, anchor: 'end' })
+  const cards = [
+    ['digby', 'running', 'Find the auth middleware', 'Explore', '⠹ Grep  "verifyToken"', 0],
+    ['bricks', 'running', 'Plan the session refactor', 'Plan', '⠼ Read  src/session.ts', 0],
+    ['bristle', 'waiting', 'Review the token changes', 'code-review', 'waiting for permission', 1],
+    ['puff', 'idle', 'Sketch the migration', 'general-purpose', '"Drafted the three steps."', 1],
+    ['pip', 'completed', 'Summarise the API docs', 'Explore', '✓ finished in 1m 12s', 0],
+  ]
+  const statusText = { running: ['busy', P.hot], waiting: ['waiting', P.warm], idle: ['napping', LILAC], completed: ['done', P.hot] }
+  const times = ['0:42', '1:05', '0:18', '2:31', '1:12']
+  cards.forEach(([key, status, desc, type, line, depth], i) => {
+    const y = 66 + i * 78
+    const x = 24 + depth * 32
+    const b = resolveBuddy({ key, variant: 0 })
+    const [label, color] = statusText[status]
+    s += box(x, y, W - 24 - x, 68, status === 'completed' ? LINE : color)
+    s += place(buddy(key, status, 48), x + 12, y + 10)
+    s += text(x + 76, y + 28, `${i + 1}  ${b.name}`, { size: 13, fill: P.ink, weight: 'bold' })
+    s += text(x + 170, y + 28, desc, { size: 13, fill: P.ink })
+    s += text(W - 44, y + 28, `${label} · ${times[i]}`, { size: 12, fill: color, anchor: 'end' })
+    s += text(x + 76, y + 50, type, { size: 12, fill: MUTED })
+    s += text(x + 170, y + 50, line, { size: 12, fill: MUTED })
+    s += text(W - 44, y + 50, 'output ›', { size: 12, fill: LILAC, anchor: 'end' })
+  })
+  return scene(W, H, 'agent-den: the den pane with a card for each subagent', s)
+}
+
+function promptCoachImprove() {
+  const W = 880, H = 300
+  let s = ''
+  s += text(32, 44, 'improve it', { size: 20, fill: OWL, weight: 'bold', spacing: 1 })
+  s += text(184, 44, 'your prompt comes back with a question for each missing part', { size: 13, fill: MUTED })
+
+  s += box(24, 70, 560, 200, LINE)
+  const lines = [
+    ['Add CSV export to the reports page. Finance pastes', P.ink],
+    ['the numbers into sheets by hand today. Reuse the', P.ink],
+    ['existing table model.', P.ink],
+    ['', P.ink],
+    ['## Done when', P.warm],
+    ['- <Which test proves it works?>', P.cold],
+  ]
+  lines.forEach(([l, c], i) => { s += text(44, 104 + i * 26, l, { size: 13, fill: c }) })
+
+  s += place(coach.quillSvg('happy', 96), 660, 76)
+  s += text(708, 204, '3/4  →  4/4', { size: 16, fill: P.hot, weight: 'bold', anchor: 'middle' })
+  s += text(708, 230, 'nice brief ✓', { size: 13, fill: MUTED, anchor: 'middle' })
+  return scene(W, H, 'prompt-coach: improve it puts a question for each missing part back in the prompt box', s)
+}
+
 mkdirSync('docs/images', { recursive: true })
 writeFileSync('docs/images/hero.svg', hero())
 writeFileSync('docs/images/cache-thermo.svg', cacheThermo())
 writeFileSync('docs/images/agent-den.svg', agentDen())
 writeFileSync('docs/images/prompt-coach.svg', promptCoach())
+writeFileSync('docs/images/cache-thermo-cast.svg', cacheThermoCast())
+writeFileSync('docs/images/agent-den-panel.svg', agentDenPanel())
+writeFileSync('docs/images/prompt-coach-improve.svg', promptCoachImprove())

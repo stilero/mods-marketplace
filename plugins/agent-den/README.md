@@ -2,6 +2,8 @@
 
 A Claude Code mod that shows your subagents. The Agent den is a pane with one animated pixel buddy for each subagent. You see at a glance which agents run, wait, nap or are done, and which tool each one runs now. Click a buddy to open its output in a second pane. The mod works in the terminal, in Claude Code Desktop and in VS Code.
 
+<img src="../../docs/images/agent-den-panel.svg" alt="The Agent den pane: a card for each subagent with its buddy, task, agent type, current tool, status and elapsed time" width="880">
+
 Spec and design: [docs/agent-den-PRD.md](../../docs/agent-den-PRD.md).
 
 ## What you get
@@ -13,7 +15,20 @@ Spec and design: [docs/agent-den-PRD.md](../../docs/agent-den-PRD.md).
 - **Easy to hide.** The `hide` button, Esc, or `/agent-den hide`. A hidden den stays hidden until you open it again.
 - **A status line**, for example `🐾 2 busy · 1 napping · 3 done`.
 
-The look follows [cache-thermo](../cache-thermo/): calm pastels on a dark panel, round dim borders, pixel art on the desktop and one-cell ASCII in the terminal.
+### Meet the buddies
+
+<img src="../../docs/images/agent-den.svg" alt="All ten buddies busy, and one buddy for each status: hatching, busy, waiting, napping, done, oops and stopped" width="880">
+
+### In the terminal
+
+The look follows [cache-thermo](../cache-thermo/): calm pastels on a dark panel, round dim borders, pixel art on the desktop and one-cell ASCII in the terminal:
+
+```
+   _/=o=\_       /\/\/\/\      .-(~~)-.      (o)-(o)
+   (｡◕‿◕｡)       ( ◕_◕ )       (｡-‿-｡) z     (｡ᵔ‿ᵔ｡)
+   o(_ _)o       o(_ _)o       o(_ _)o       o(___)o
+    busy         waiting       napping         done
+```
 
 ## Install
 

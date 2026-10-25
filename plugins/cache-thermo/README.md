@@ -2,6 +2,8 @@
 
 A Claude Code mod that makes the prompt cache visible, gates cold-cache runs, and keeps the cache warm while you are on a break. Retro look, pixel-art mascots (Ember the fire sprite, Frostbit the ice imp), 8-bit bleeps.
 
+<img src="../../docs/images/cache-thermo.svg" alt="The thermometer band in hot, warm and cold, the cold-cache gate with Frostbit, and break mode with Ember at the campfire" width="880">
+
 Spec and design: [docs/cache-thermo-PRD.md](../../docs/cache-thermo-PRD.md).
 
 ## What you get
@@ -10,6 +12,25 @@ Spec and design: [docs/cache-thermo-PRD.md](../../docs/cache-thermo-PRD.md).
 - **Cold-cache gate**. Submit a prompt while the cache is cold and the estimated re-cache cost clears the threshold, and the band turns into Frostbit's cold-cache view and holds the prompt: `go ahead anyway · $8.48` (`c`) or `keep my prompt` (`x`), which puts the text back in the composer.
 - **Break mode**. `☕ break` (or `/cache-thermo break`) turns the band into the break view (Ember at the campfire, next nudge countdown, nudges and spend) and refreshes the cache just before the TTL lapses with a tiny cache-read request. Come back with `I'm back`, `/cache-thermo resume`, or just type a prompt.
 - **Transition toasts** when the cache turns cooling and cold, with sounds on macOS.
+
+### The cast
+
+<img src="../../docs/images/cache-thermo-cast.svg" alt="Ember when the cache is hot, while Claude works and as it cools down, Frostbit when the cache is cold, and Ember at the campfire on a break" width="880">
+
+Ember changes mood with the cache: glowing while it is hot, blazing while a request refreshes the cache, fading as it cools. Frostbit takes over when the cache goes cold, and Ember sits by the campfire while you are on a break.
+
+### In the terminal
+
+The terminal gets the same cast as one-cell ASCII, next to a block-character thermometer:
+
+```
+    (                       * /\/\/\ .                )
+   ) )          ,            (｡◕~◕｡)       (｡ᵔ‿ᵔ｡)   ( (
+ (｡◕‿◕｡)     (｡-‿-｡) zᶻ     .  u  u  *      c[_]    /\/\
+   hot         cooling          cold            break
+
+██████████████░░░░░░
+```
 
 ## Install
 
