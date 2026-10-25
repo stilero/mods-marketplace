@@ -1,0 +1,74 @@
+{
+  "name": "cache-thermo",
+  "version": "0.2.2",
+  "description": "Retro prompt-cache thermometer above the prompt, a cold-cache gate that shows what the next prompt will cost, and a break mode that keeps the cache warm.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "cacheTtl": {
+      "type": "string",
+      "default": "auto",
+      "options": [
+        "auto",
+        "5m",
+        "1h"
+      ],
+      "description": "Prompt-cache TTL the thermometer counts down from when the engine has not reported one. auto: 1h on a subscription, 5m on an API key.",
+      "title": "Cache TTL"
+    },
+    "gateThresholdUsd": {
+      "type": "number",
+      "default": 0.25,
+      "description": "Show the cold-cache gate only when the estimated re-cache cost is at least this many dollars. 0 gates every cold prompt.",
+      "title": "Gate threshold (USD)"
+    },
+    "warnFraction": {
+      "type": "number",
+      "default": 0.2,
+      "description": "The band turns yellow when the remaining TTL is at or below this fraction.",
+      "title": "Warn fraction"
+    },
+    "keepWarmLeadSeconds": {
+      "type": "number",
+      "default": 90,
+      "description": "On a break, refresh the cache when this many seconds remain.",
+      "title": "Keep-warm lead (seconds)"
+    },
+    "maxBreakHours": {
+      "type": "number",
+      "default": 4,
+      "description": "Stop keeping the cache warm after a break this long.",
+      "title": "Max break (hours)"
+    },
+    "inputPriceOverrideUsdPerMTok": {
+      "type": "number",
+      "default": 0,
+      "description": "When above 0, replaces the shipped input price per million tokens for the current model.",
+      "title": "Input price override ($/MTok)"
+    },
+    "sounds": {
+      "type": "boolean",
+      "default": true,
+      "description": "Play the 8-bit bleeps (macOS only).",
+      "title": "Sounds"
+    },
+    "showCostOnSubscription": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show API-equivalent dollar figures on a subscription account; off shows tokens only.",
+      "title": "Show cost on subscription"
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Eliasson",
+    "email": "daniel@stilero.com"
+  },
+  "keywords": [
+    "cache",
+    "prompt-cache",
+    "cost",
+    "thermometer",
+    "retro",
+    "mod"
+  ]
+}

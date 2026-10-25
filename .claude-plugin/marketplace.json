@@ -1,0 +1,24 @@
+{
+  "name": "mods-marketplace",
+  "owner": {
+    "name": "Daniel Eliasson"
+  },
+  "plugins": [
+    {
+      "name": "cache-thermo",
+      "source": "./plugins/cache-thermo",
+      "description": "Retro prompt-cache thermometer, cold-cache gate and keep-warm break mode."
+    },
+    {
+      "name": "prompt-coach",
+      "source": "./plugins/prompt-coach",
+      "description": "Quill the owl coaches the prompt that starts your work: goal, why, constraints, done-when and reuse, as hints or a gate."
+    },
+    {
+      "name": "agent-den",
+      "source": "./plugins/agent-den",
+      "description": "A den of animated pixel buddies, one per subagent: status at a glance, click for its output."
+    }
+  ],
+  "description": "Daniel Eliasson's experimental Claude Code mods: UI and behaviour plugins built on the function-hooks API."
+}

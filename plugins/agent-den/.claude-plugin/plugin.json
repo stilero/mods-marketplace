@@ -1,0 +1,56 @@
+{
+  "name": "agent-den",
+  "version": "0.1.0",
+  "description": "One animated pixel buddy per subagent: see who runs, what they do, and open their output. Terminal, Desktop and VS Code.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "autoOpen": {
+      "type": "boolean",
+      "default": true,
+      "description": "Open the den when the first subagent starts.",
+      "title": "Open automatically"
+    },
+    "keepFinishedMinutes": {
+      "type": "number",
+      "default": 10,
+      "description": "Finished buddies stay this long, then wave goodbye.",
+      "title": "Keep finished buddies (minutes)"
+    },
+    "animations": {
+      "type": "string",
+      "default": "full",
+      "options": [
+        "full",
+        "calm",
+        "off"
+      ],
+      "description": "calm drops the bounce and the confetti; off is static.",
+      "title": "Animations"
+    },
+    "buddyMap": {
+      "type": "string",
+      "default": "",
+      "description": "Pin agent types to buddies, e.g. Explore=digby, my-agent=moss.",
+      "title": "Buddy map"
+    },
+    "maxLogLines": {
+      "type": "number",
+      "default": 300,
+      "description": "Lines kept per agent log.",
+      "title": "Max log lines"
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Eliasson",
+    "email": "daniel@stilero.com"
+  },
+  "keywords": [
+    "subagents",
+    "agents",
+    "panel",
+    "buddies",
+    "animation",
+    "mod"
+  ]
+}

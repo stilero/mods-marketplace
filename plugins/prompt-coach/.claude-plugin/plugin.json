@@ -1,0 +1,40 @@
+{
+  "name": "prompt-coach",
+  "version": "0.1.3",
+  "description": "Quill the owl reads the prompt that starts your work and coaches it toward a good brief: goal, why, constraints, what done looks like, and what to reuse.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "default": "hints",
+      "options": ["hints", "gate"],
+      "description": "hints: the prompt is sent at once and the panel shows what to add next time. gate: a prompt missing parts waits in the panel until you improve it or send it anyway.",
+      "title": "Mode"
+    },
+    "trigger": {
+      "type": "string",
+      "default": "conversation",
+      "options": ["conversation", "every"],
+      "description": "conversation: coach the first task prompt of each conversation (start, /clear, compaction) and when you ask. every: coach every task prompt typed while Claude is idle.",
+      "title": "When to coach"
+    },
+    "model": {
+      "type": "string",
+      "default": "haiku",
+      "description": "The model that reads the prompt: an alias such as haiku, or a full model id.",
+      "title": "Coach model"
+    },
+    "minChars": {
+      "type": "number",
+      "default": 20,
+      "description": "Prompts shorter than this many characters are never read (no model call).",
+      "title": "Minimum prompt length"
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Eliasson",
+    "email": "daniel@stilero.com"
+  },
+  "keywords": ["prompt", "prompting", "coach", "planning", "brief", "mod"]
+}

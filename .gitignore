@@ -1,0 +1,24 @@
+# Type declarations the engine lays beside each mod when a session loads it
+plugins/*/.claude-plugin/types/
+
+# Bundle cache
+.mcpb-cache/
+
+# Node
+node_modules/
+npm-debug.log*
+*.tsbuildinfo
+
+# Local secrets
+.env
+.env.*
+
+# Local Claude Code settings
+.claude/settings.local.json
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
