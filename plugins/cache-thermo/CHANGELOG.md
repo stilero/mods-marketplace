@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3 (2026-10-26)
+
+- The VS Code extension draws the same pixel art as Claude Code Desktop (the thermometer, Frostbit at the gate, Ember by the campfire on a break) instead of the terminal's ASCII frames.
+
 ## 0.2.2 (2026-10-22)
 
 - `/cache-thermo cold` says what the next prompt will do: held by the gate, or under the gate threshold and sent straight through (with how to gate every cold prompt). A small context, or a 5m TTL, used to pass silently and look like a broken gate.

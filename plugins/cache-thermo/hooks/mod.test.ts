@@ -326,6 +326,35 @@ describe('a new prefix', () => {
   })
 })
 
+describe('pixel art', () => {
+  test('desktop and VS Code draw the SVG art in every band view, the terminal and mobile draw none', async ($, on) => {
+    const clock = mock.clock(on, { now: T0 })
+    world(on)
+    await answered($)
+    const svgs = async (surface: 'terminal' | 'desktop' | 'vscode' | 'mobile'): Promise<number> => {
+      const ui = await $.ui.mount({ plugin: 'cache-thermo', surface, ...BAND })
+      const n = (await ui.findAll({ type: 'Svg' })).length
+      await ui.unmount()
+      return n
+    }
+    // The thermometer.
+    expect(await svgs('vscode')).toBe(1)
+    expect(await svgs('desktop')).toBe(1)
+    expect(await svgs('terminal')).toBe(0)
+    expect(await svgs('mobile')).toBe(0)
+    // Ember by the campfire.
+    await $.command.run({ command: 'cache-thermo', args: 'break', origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 120 } })
+    expect(await svgs('vscode')).toBe(1)
+    expect(await svgs('terminal')).toBe(0)
+    await $.command.run({ command: 'cache-thermo', args: 'resume', origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 120 } })
+    // Frostbit at the gate.
+    await clock.advance(2 * HOUR)
+    await $.prompt.submit({ text: 'expensive question', wait: false, origin: { kind: 'composer' } })
+    expect(await svgs('vscode')).toBe(1)
+    expect(await svgs('terminal')).toBe(0)
+  })
+})
+
 describe('break mode', () => {
   test('the band button starts and ends a break without the command dispatch', async ($, on) => {
     mock.clock(on, { now: T0 })

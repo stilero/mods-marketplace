@@ -1,6 +1,6 @@
 {
   "name": "cache-thermo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Retro prompt-cache thermometer above the prompt, a cold-cache gate that shows what the next prompt will cost, and a break mode that keeps the cache warm.",
   "types": "./types/index.d.ts",
   "userConfig": {

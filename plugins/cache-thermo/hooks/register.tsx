@@ -24,7 +24,7 @@ import { currentEstimate, moneyText, rt } from './runtime'
 import { THEME, ZONE_DOT, ZONE_LABEL, zoneColor } from './theme'
 import type { SoundName } from './runtime'
 const PLUGIN = 'cache-thermo'
-const BUILD = '0.2.2'
+const BUILD = '0.2.3'
 
 const clockAtom = atom({ plugin: 'cache-thermo', key: 'clock' } as const, null)
 const contextAtom = atom({ plugin: 'cache-thermo', key: 'context' } as const, null)
@@ -436,6 +436,8 @@ export const register: Register = (on, options) => {
       void endBreak($, 'button')
     }
     const onHide = () => update($, isBandHiddenAtom, () => true)
+    // Desktop and the VS Code extension draw the SVG pixel art; the terminal draws the ASCII frames.
+    const isVector = e.surface === 'desktop' || e.surface === 'vscode'
 
     // A held prompt takes the band over until the person picks: the gate is a band view, not a pane.
     if (gate !== null) {
@@ -464,7 +466,7 @@ export const register: Register = (on, options) => {
           keep my prompt
         </Button>,
       ]
-      if (e.surface === 'desktop') {
+      if (isVector) {
         const { Box, Text, Svg } = $.ui.resolve(e)
         return (
           <Box
@@ -523,7 +525,7 @@ export const register: Register = (on, options) => {
         : `☕ on a break · keeping the cache warm · next nudge in ${formatClock(untilRefresh)}`
       const spent = moneyText(brk.spentUsd, ctx.isSubscription)
       const line2 = `${brk.refreshes} ${brk.refreshes === 1 ? 'nudge' : 'nudges'}${spent === null ? '' : ` · ≈ ${spent} spent`} · away ${formatClock(now - brk.since)} · auto-stop after ${rt.opts.maxBreakHours}h`
-      if (e.surface === 'desktop') {
+      if (isVector) {
         const { Box, Text, Button, Svg } = $.ui.resolve(e)
         return (
           <Box
@@ -574,9 +576,9 @@ export const register: Register = (on, options) => {
       )
     }
 
-    if (e.surface === 'desktop') {
+    if (isVector) {
       const { Box, Text, Button, Svg } = $.ui.resolve(e)
-      // The band is narrow on the desktop (roughly 5 px per cell): keep the tube to about a third.
+      // The band is narrow on the desktop and in VS Code (roughly 5 px per cell): keep the tube to about a third.
       const widthPx = Math.round(Math.min(240, Math.max(140, e.props.bodyColumns * 1.8)))
       return (
         <Box
