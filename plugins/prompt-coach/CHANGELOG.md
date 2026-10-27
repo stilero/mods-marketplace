@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 (2026-10-27)
+
+- The VS Code extension draws Quill as pixel art, the same SVG as Claude Code Desktop. Before, it drew the ASCII frames of the terminal. The terminal and mobile do not change.
+
 ## 0.1.3 (2026-10-22)
 
 - Quill reads the first task prompt after a `/clear` again. A `/clear` starts a conversation with state of its own and raises no `session.start`, so the arming Quill wrote when the old conversation ended was lost; it now arms on the new conversation's first prompt.

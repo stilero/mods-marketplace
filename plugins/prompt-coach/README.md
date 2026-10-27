@@ -33,7 +33,7 @@ Not every part applies to every prompt. A small model (Haiku by default) decides
 
 ### In the terminal
 
-The look follows [cache-thermo](../cache-thermo/): calm mint, honey and rose on a dark panel, round dim borders, pixel art on the desktop and one-cell ASCII in the terminal:
+The look follows [cache-thermo](../cache-thermo/): calm mint, honey and rose on a dark panel, round dim borders, pixel art on the desktop and in VS Code, and one-cell ASCII in the terminal:
 
 ```
  ,___,     ,___,        ,___,  ?     ,___,  *

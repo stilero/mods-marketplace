@@ -1,6 +1,6 @@
 {
   "name": "prompt-coach",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Quill the owl reads the prompt that starts your work and coaches it toward a good brief: goal, why, constraints, what done looks like, and what to reuse.",
   "types": "./types/index.d.ts",
   "userConfig": {

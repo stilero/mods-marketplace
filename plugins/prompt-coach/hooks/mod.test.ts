@@ -398,3 +398,21 @@ describe('arming', () => {
     expect((await command($, '')).text).toContain('hints mode')
   })
 })
+
+describe('pixel art', () => {
+  test('desktop and VS Code draw Quill as SVG, the terminal and mobile draw none', async ($, on) => {
+    mock.clock(on, { now: T0 })
+    world(on)
+    await start($)
+    const svgs = async (surface: 'terminal' | 'desktop' | 'vscode' | 'mobile'): Promise<number> => {
+      const ui = await $.ui.mount({ ...PANE, surface })
+      const n = (await ui.findAll({ type: 'Svg' })).length
+      await ui.unmount()
+      return n
+    }
+    expect(await svgs('vscode')).toBe(1)
+    expect(await svgs('desktop')).toBe(1)
+    expect(await svgs('terminal')).toBe(0)
+    expect(await svgs('mobile')).toBe(0)
+  })
+})

@@ -9,7 +9,7 @@ import { readOptions } from './options'
 import { rt } from './runtime'
 import { BLURB, CRITERIA, LABEL, STATUS_DOT, statusColor, THEME } from './theme'
 
-const BUILD = '0.1.3'
+const BUILD = '0.1.4'
 const PANE = 'prompt-coach'
 const PANE_TITLE = 'Prompt coach'
 const COMMAND = 'prompt-coach'
@@ -419,7 +419,8 @@ export const register: Register = (on, options) => {
     const statsLine = stats === null ? null : <Text color={THEME.dim}>{stats}</Text>
 
     // The pane draws its own frame: no border of ours inside it.
-    if (e.surface === 'desktop') {
+    // Desktop and the VS Code extension draw the SVG pixel art; the terminal draws the ASCII frames.
+    if (e.surface === 'desktop' || e.surface === 'vscode') {
       const { Svg } = $.ui.resolve(e)
       return (
         <Box key="prompt-coach-pane" flexDirection="column" backgroundColor={THEME.panel} paddingX={1} gap={1}>
