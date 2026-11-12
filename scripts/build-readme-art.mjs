@@ -7,6 +7,7 @@ const den = await import('../plugins/agent-den/hooks/art.ts')
 const { ROSTER, resolveBuddy } = await import('../plugins/agent-den/hooks/buddies.ts')
 const thermo = await import('../plugins/cache-thermo/hooks/art.ts')
 const coach = await import('../plugins/prompt-coach/hooks/art.ts')
+const advisor = await import('../plugins/model-advisor/hooks/art.ts')
 
 const P = thermo.PALETTE
 const MUTED = 'rgba(223,231,239,0.55)'
@@ -14,6 +15,7 @@ const LINE = 'rgba(223,231,239,0.18)'
 const FONT = `font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace"`
 const OWL = '#e8c39e'
 const LILAC = '#c4b5fd'
+const STEEL = '#a9c4e4'
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
@@ -43,19 +45,20 @@ function hero() {
   const W = 880, H = 300
   let s = ''
   s += text(40, 62, 'mods-marketplace', { size: 30, fill: P.hot, weight: 'bold', spacing: 1 })
-  s += text(40, 92, 'Pixel-art mods for Claude Code · cache, prompts and subagents, made visible', { size: 14, fill: MUTED })
+  s += text(40, 92, 'Pixel-art mods for Claude Code · cache, models, prompts and subagents, made visible', { size: 14, fill: MUTED })
 
   // cache-thermo strip
   s += place(thermo.emberSvg('hot', 48), 40, 122)
   s += place(thermo.thermometerSvg({ fraction: 0.72, zone: 'hot', widthPx: 520, heightPx: 32 }), 100, 130)
   s += text(636, 152, '43:12 left · 182k ctx', { size: 13, fill: P.hot })
 
-  // agent-den row + Quill
+  // agent-den row, Cog and Quill
   const keys = ['digby', 'bricks', 'bolt', 'pip', 'mochi', 'moss']
   const statuses = ['running', 'running', 'waiting', 'idle', 'running', 'completed']
   keys.forEach((k, i) => { s += place(buddy(k, statuses[i], 72), 40 + i * 86, 196) })
+  s += place(advisor.cogSvg('down', 96), 606, 180)
   s += place(coach.quillSvg('reading', 96), 740, 180)
-  return scene(W, H, 'mods-marketplace: cache-thermo, agent-den and prompt-coach', s)
+  return scene(W, H, 'mods-marketplace: cache-thermo, agent-den, model-advisor and prompt-coach', s)
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -172,6 +175,39 @@ function promptCoach() {
 }
 
 // ---------------------------------------------------------------------------------------------------------------
+// model-advisor: Cog's five moods, the gate that holds a prompt, and the advice to shift up.
+
+function modelAdvisor() {
+  const W = 880, H = 330
+  let s = ''
+  s += text(32, 44, 'model-advisor', { size: 20, fill: STEEL, weight: 'bold', spacing: 1 })
+  s += text(224, 44, 'Cog finds the lowest model and effort that will do the work', { size: 13, fill: MUTED })
+
+  const moods = ['idle', 'reading', 'fit', 'down', 'up']
+  moods.forEach((m, i) => {
+    const x = 32 + (i % 3) * 84, y = 72 + Math.floor(i / 3) * 124
+    s += place(advisor.cogSvg(m, 72), x, y)
+    s += text(x + 36, y + 92, m, { size: 12, fill: MUTED, anchor: 'middle' })
+  })
+
+  const px = 300, py = 66, pw = W - px - 32
+  s += box(px, py, pw, 136, P.hot)
+  s += place(advisor.cogSvg('down', 56), px + 16, py + 18)
+  s += text(px + 88, py + 34, '▼ shift down · trivial work fits haiku · low', { size: 14, fill: P.hot, weight: 'bold' })
+  s += text(px + 88, py + 60, 'One mechanical edit, fully specified.', { size: 13, fill: P.ink })
+  s += text(px + 88, py + 84, 'now on opus · high · your prompt waits for your pick', { size: 12, fill: MUTED })
+  s += text(px + 88, py + 116, '[s] use haiku · low   [a] send anyway   [x] keep my prompt', { size: 12, fill: P.ink })
+
+  const qy = py + 152
+  s += box(px, qy, pw, 96, LILAC)
+  s += place(advisor.cogSvg('up', 56), px + 16, qy + 18)
+  s += text(px + 88, qy + 34, '▲ shift up · deep work needs fable · xhigh', { size: 14, fill: LILAC, weight: 'bold' })
+  s += text(px + 88, qy + 60, 'Novel, high-stakes work with little guidance.', { size: 13, fill: P.ink })
+  s += text(px + 88, qy + 82, 'now on sonnet · medium', { size: 12, fill: MUTED })
+  return scene(W, H, 'model-advisor: Cog the robot holds a prompt that fits another model or effort', s)
+}
+
+// ---------------------------------------------------------------------------------------------------------------
 // Plugin README scenes: the cast of cache-thermo, a den with cards, and Quill's improve-it round trip.
 
 function cacheThermoCast() {
@@ -253,6 +289,7 @@ writeFileSync('docs/images/hero.svg', hero())
 writeFileSync('docs/images/cache-thermo.svg', cacheThermo())
 writeFileSync('docs/images/agent-den.svg', agentDen())
 writeFileSync('docs/images/prompt-coach.svg', promptCoach())
+writeFileSync('docs/images/model-advisor.svg', modelAdvisor())
 writeFileSync('docs/images/cache-thermo-cast.svg', cacheThermoCast())
 writeFileSync('docs/images/agent-den-panel.svg', agentDenPanel())
 writeFileSync('docs/images/prompt-coach-improve.svg', promptCoachImprove())

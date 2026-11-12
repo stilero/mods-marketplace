@@ -53,3 +53,24 @@ A session cannot reload an installed marketplace plugin, and it cannot take a sc
    `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --window-size=820,1000 --screenshot=out.png file://<path>.html`
 
 This shows the tree that the mod draws, not the live host. Say so when you report the result.
+
+### Only one mod draws the `AbovePrompt` band
+
+Hooks run in the order in which the mods were installed: the first mod is at the top of the chain. An `AbovePrompt` hook that returns a tree without `next(e)` hides the band of every mod below it. For example, cache-thermo draws its thermometer when it has a cache clock, so a mod that was installed later cannot show a band then.
+
+- Do not rely on the band for something that the person must answer (a gate). model-advisor opens its own pane when the band did not draw its advice after 0.7 seconds (`ensureShown` in `plugins/model-advisor/hooks/register.tsx`).
+- To see the order, run a session with `--debug-file <path>` and search the log for `prompt.submit settled`: the line lists the mods from the top of the chain to the bottom.
+
+### Check engine behaviour with a headless probe
+
+`claude plugin test` mocks the engine below the mod. To see what the real engine returns (the text of `$.session.model()`, a reply of `$.model.complete`, the result of `$.command.run`), write a throw-away mod outside the repo and run it headless:
+
+```sh
+(printf '%s\n' '{"type":"user","message":{"role":"user","content":"probe"}}'; sleep 45) | \
+  claude -p --input-format stream-json --output-format stream-json --verbose \
+  --plugin-dir <probe folder> --debug-file <log path>
+```
+
+- In the probe, do the reads in a `prompt.submit` hook, write the results with `$.fs.write`, and return `{ drop }`. Then the main model does not run and the probe costs nothing but its own calls.
+- A hook cannot call `$.command.run` or `$.prompt.submit` while its own event waits on it. Start that work with `$.clock.after`.
+- A headless run has no surface: `$.session.surfaces()` is empty and no `ui.render` hook runs.

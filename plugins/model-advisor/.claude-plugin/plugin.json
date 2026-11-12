@@ -1,0 +1,59 @@
+{
+  "name": "model-advisor",
+  "version": "0.1.0",
+  "description": "Cog the robot weighs the prompt that starts your work and advises the lowest model and effort that will do it well: a gate holds the prompt until you switch, send anyway or keep it.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "default": "gate",
+      "options": ["gate", "hints"],
+      "description": "gate: a prompt that fits another model or effort waits in the band above the prompt until you pick. hints: the prompt is sent at once and the band shows the advice for the next prompt.",
+      "title": "Mode"
+    },
+    "gateOn": {
+      "type": "string",
+      "default": "both",
+      "options": ["both", "down", "up"],
+      "description": "Which advice holds the prompt in gate mode. both: every advice. down: only when a lower model or effort is enough (the other advice shows as a hint). up: only when the work needs more.",
+      "title": "Gate on"
+    },
+    "trigger": {
+      "type": "string",
+      "default": "conversation",
+      "options": ["conversation", "every"],
+      "description": "conversation: weigh the first prompt of each conversation (start, /clear, compaction) and when you ask. every: weigh every prompt typed while Claude is idle (one small model call per prompt).",
+      "title": "When to advise"
+    },
+    "model": {
+      "type": "string",
+      "default": "haiku",
+      "description": "The model that weighs the prompt: an alias such as haiku, or a full model id.",
+      "title": "Advisor model"
+    },
+    "ladder": {
+      "type": "string",
+      "default": "haiku,sonnet,opus,fable",
+      "description": "The models Cog may advise, from the cheapest to the most capable, as /model takes them, separated by commas. Remove the ones your account cannot use.",
+      "title": "Model ladder"
+    },
+    "effortTolerance": {
+      "type": "number",
+      "default": 1,
+      "description": "An effort that is at most this many levels from the advised one is left alone. 0 advises on every difference.",
+      "title": "Effort tolerance (levels)"
+    },
+    "minChars": {
+      "type": "number",
+      "default": 20,
+      "description": "Prompts shorter than this many characters are never weighed (no model call).",
+      "title": "Minimum prompt length"
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Eliasson",
+    "email": "daniel@stilero.com"
+  },
+  "keywords": ["model", "effort", "cost", "tokens", "advisor", "gate", "mod"]
+}
