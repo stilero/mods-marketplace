@@ -15,6 +15,11 @@
       "description": "Quill the owl coaches the prompt that starts your work: goal, why, constraints, done-when and reuse, as hints or a gate."
     },
     {
+      "name": "model-advisor",
+      "source": "./plugins/model-advisor",
+      "description": "Cog the robot weighs the prompt that starts your work and advises the lowest model and effort that will do it well, as a gate or as hints."
+    },
+    {
       "name": "agent-den",
       "source": "./plugins/agent-den",
       "description": "A den of animated pixel buddies, one per subagent: status at a glance, click for its output."

@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="docs/images/hero.svg" alt="Ember the fire sprite above a prompt-cache thermometer, a row of animated pixel buddies, and Quill the owl" width="880">
+  <img src="docs/images/hero.svg" alt="Ember the fire sprite above a prompt-cache thermometer, a row of animated pixel buddies, Cog the robot and Quill the owl" width="880">
 </p>
 
 <h1 align="center">mods-marketplace</h1>
 
 <p align="center">
   <b>Make Claude Code feel alive.</b><br>
-  Three pixel-art mods that show you what's happening under the hood: how warm your prompt cache is, what your subagents are up to, and how good your brief really was.
+  Four pixel-art mods that show you what's happening under the hood: how warm your prompt cache is, what your subagents are up to, how good your brief really was, and whether you're paying for more model than the work needs.
 </p>
 
 <p align="center">
@@ -14,12 +14,13 @@
   <a href="#cache-thermo">cache-thermo</a> ·
   <a href="#agent-den">agent-den</a> ·
   <a href="#prompt-coach">prompt-coach</a> ·
+  <a href="#model-advisor">model-advisor</a> ·
   <a href="LICENSE">MIT</a>
 </p>
 
 ---
 
-Claude Code does a lot you never see. Your cache quietly goes cold while you get coffee, and the next prompt pays to rebuild it. Five subagents run in parallel, and all you get is a spinner. A vague prompt costs you three rounds of fixes later.
+Claude Code does a lot you never see. Your cache quietly goes cold while you get coffee, and the next prompt pays to rebuild it. Five subagents run in parallel, and all you get is a spinner. A vague prompt costs you three rounds of fixes later. A one-line rename runs on your biggest model at full effort.
 
 These mods put all of that on screen in a calm pastel-on-dark style, with hand-drawn pixel mascots that react to what's happening. They work in the terminal (with ASCII art), in Claude Code Desktop and in VS Code.
 
@@ -31,6 +32,7 @@ Pick the mods you want. At the prompt of a Claude Code session:
 /plugin install cache-thermo --marketplace stilero/mods-marketplace
 /plugin install agent-den    --marketplace stilero/mods-marketplace
 /plugin install prompt-coach --marketplace stilero/mods-marketplace
+/plugin install model-advisor --marketplace stilero/mods-marketplace
 ```
 
 From a shell:
@@ -85,6 +87,20 @@ Quill, a little owl with reading glasses, reads the prompt that starts a piece o
 
 [Read more →](plugins/prompt-coach/)
 
+## model-advisor
+
+**The right model for the job, before the job starts.**
+
+<img src="docs/images/model-advisor.svg" alt="model-advisor: Cog the robot in five moods, the gate that advises to shift down from opus to haiku, and the advice to shift up to fable" width="880">
+
+Cog, a little robot with a screen on its belly, weighs the prompt that starts a piece of work. A small model rates how demanding the work is and names the lowest model and effort that will do it well. If your session runs higher, or lower, Cog tells you before the tokens are spent.
+
+- **Gate mode** holds the prompt and gives you three choices: switch and send, send anyway, or keep your prompt.
+- **Hints mode** sends your prompt right away and shows the advice for the next one.
+- **Both directions.** A rename on Opus at high effort gets a mint arrow down. A migration on Sonnet gets a lavender arrow up.
+
+[Read more →](plugins/model-advisor/)
+
 ---
 
 ## Hacking on the mods
@@ -102,7 +118,7 @@ Validate before committing:
 
 ```bash
 claude plugin validate .
-for mod in cache-thermo prompt-coach agent-den; do
+for mod in cache-thermo prompt-coach agent-den model-advisor; do
   claude plugin validate plugins/$mod && claude plugin test plugins/$mod
 done
 ```
