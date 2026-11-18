@@ -23,6 +23,11 @@
       "name": "agent-den",
       "source": "./plugins/agent-den",
       "description": "A den of animated pixel buddies, one per subagent: status at a glance, click for its output."
+    },
+    {
+      "name": "security-advisor",
+      "source": "./plugins/security-advisor",
+      "description": "Checks that you don't leak any sensitive data to Claude and that you don't use any unsafe skills, plugins or mcp servers. Warns you before a risky skill runs."
     }
   ],
   "description": "Daniel Eliasson's experimental Claude Code mods: UI and behaviour plugins built on the function-hooks API."

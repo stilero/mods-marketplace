@@ -1,0 +1,9 @@
+{
+  "name": "security-advisor",
+  "version": "1.3.1",
+  "description": "Checks that you don't leak any sensitive data to Claude and that you don't use any unsafe skills, plugins or mcp servers. Warns you before a risky skill runs.",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": { "name": "Daniel Eliasson" },
+  "keywords": ["security", "skills", "guardrails", "prompt-injection", "advisor"]
+}
