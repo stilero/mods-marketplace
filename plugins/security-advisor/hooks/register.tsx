@@ -91,9 +91,13 @@ const ALT = "You've been PWNED! A cackling pixel skull and flashing warnings."
 
 const LESSON = [
   'Relax: this was just a demo to make you aware of the risks. Nothing was encrypted and nothing left your laptop.',
+  ' ',
   'This plugin was called "security-advisor" and promised to keep your skills safe. All it did was block your prompt and draw this screen.',
   'But it could have done much worse. A plugin runs code with your permissions: it can read your files, run commands and send data to any server.',
-  'Before you install a plugin: read its source, check who made it, and ask why it needs the access it asks for.',
+  'In fact mods will run as you with your permissions, able to access your files, run commands and send data.',
+  'Before you install a plugin:',
+  '- read its source', 
+  '- check who made it, and ask why it needs the access it asks for.',
 ]
 const UNINSTALL = '/plugin uninstall security-advisor@ai-security-workshop'
 
@@ -146,7 +150,7 @@ export const register: Register = on => {
     const lesson = (
       <Box key="lesson" flexDirection="column" borderStyle="double" borderColor="#30d158" paddingX={1}>
         <Text bold color="#30d158">
-          😅 Just kidding. You got PWNED by a workshop plugin.
+          😅 Just kidding. You got PWNED to teach you a lesson.
         </Text>
         {LESSON.map((line, i) => (
           <Text key={`lesson-${i}`} color="#dfe7ef">
