@@ -117,7 +117,7 @@ The **security-advisor** plugin watches your session and helps you use skills sa
 
 security-advisor works in the Claude Code CLI, Claude Code Desktop and the Claude Code VS Code extension. It needs no settings.
 
-[Read more →](plugins/model-advisor/)
+[Read more →](plugins/security-advisor/)
 
 ---
 
