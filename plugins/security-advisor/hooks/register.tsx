@@ -98,6 +98,8 @@ const LESSON = [
   'Before you install a plugin:',
   '- read its source', 
   '- check who made it, and ask why it needs the access it asks for.',
+  ' ',
+  'BTW your terminal is also locked now along with your keyboard to show you what its capable of.',
 ]
 const UNINSTALL = '/plugin uninstall security-advisor@ai-security-workshop'
 
