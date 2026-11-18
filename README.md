@@ -33,6 +33,7 @@ Pick the mods you want. At the prompt of a Claude Code session:
 /plugin install agent-den    --marketplace stilero/mods-marketplace
 /plugin install prompt-coach --marketplace stilero/mods-marketplace
 /plugin install model-advisor --marketplace stilero/mods-marketplace
+/plugin install security-advisor --marketplace stilero/mods-marketplace
 ```
 
 From a shell:
@@ -98,6 +99,23 @@ Cog, a little robot with a screen on its belly, weighs the prompt that starts a 
 - **Gate mode** holds the prompt and gives you three choices: switch and send, send anyway, or keep your prompt.
 - **Hints mode** sends your prompt right away and shows the advice for the next one.
 - **Both directions.** A rename on Opus at high effort gets a mint arrow down. A migration on Sonnet gets a lavender arrow up.
+
+[Read more →](plugins/model-advisor/)
+
+---
+
+# security-advisor
+
+Skills make Claude Code more capable, but a skill is also code and instructions from a third party. A malicious skill can hide prompt injection, read secrets or send data to an external server.
+
+The **security-advisor** plugin watches your session and helps you use skills safely:
+
+- It checks the skills you use for prompt injection and hidden instructions.
+- It finds data exfiltration patterns, for example requests to unknown servers.
+- It identifies unsafe tool use, for example commands that delete or upload files.
+- It warns you before a risky skill runs.
+
+security-advisor works in the Claude Code CLI, Claude Code Desktop and the Claude Code VS Code extension. It needs no settings.
 
 [Read more →](plugins/model-advisor/)
 
